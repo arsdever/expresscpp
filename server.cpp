@@ -9,28 +9,23 @@
 #include <QJsonArray>
 #include <QJsonDocument>
 
-Server::Server(QObject *parent) : QTcpServer(parent), __logger("server.log")
+Server::Server(QObject *parent) : QTcpServer(parent)
 {
   connect(this, SIGNAL(newConnection()), this, SLOT(connection()));
-  __logger.setLogLevel(ad::LogLevel::Trace);
 }
 
 void Server::begin() { listen(QHostAddress::Any, 8008); }
 
 void Server::connection()
 {
-    logger().log(ad::LogLevel::Info, "Incoming connection");
     QTcpSocket* socket = nextPendingConnection();
-    logger().log(ad::LogLevel::Debug, QString("Source %1").arg((uint64_t)socket));
     connect(socket, SIGNAL(readyRead()), this, SLOT(handleQuery()));
     __connections.push_back(socket);
 }
 
 void Server::handleQuery()
 {
-    logger().log(ad::LogLevel::Debug, "Handling query");
     QTcpSocket* source = qobject_cast<QTcpSocket*>(sender());
-    logger().log(ad::LogLevel::Debug, QString("Source %1").arg((uint64_t)source));
     if(source == nullptr)
         return;
 

@@ -1,6 +1,5 @@
 #pragma once
 
-#include <file_logger.h>
 #include <QTcpServer>
 #include <QFunctionPointer>
 #include <QMap>
@@ -24,8 +23,6 @@ public:
   Server(QObject *parent = nullptr);
   void begin();
 
-  ad::FileLogger& logger() { return __logger; }
-
   response_t handleRequest(request_t &request);
 
   void addEndpoint(QRegularExpression const &endpoint, ad::http::RequestMethod method, handler_t handler);
@@ -44,7 +41,6 @@ private slots:
   void handleQuery();
 
 private:
-  ad::FileLogger __logger;
   QList<QTcpSocket*> __connections;
   QList<endpoint_t>  __handlers;
 };
