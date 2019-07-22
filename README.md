@@ -5,6 +5,8 @@ This is a library similar to ExpressJS framework. It was developed for
 
 # Usage
 
+## Preparations
+
 First of all you have to have installed [Qt 5.12.2](http://download.qt.io/official_releases/qt/5.12/5.12.2/)*
 
 (*note that the application was developed under Qt v5.12.2, that's why the reference is to this version. It may work with the newer versions as well*)
@@ -21,7 +23,7 @@ make
 
 *__If case you download components in different folders, please have a look at the `.pro` file of `expresscpp` component to make sure that given include path is correct__*
 
-## Code example
+## Example code
 
 This is a simple code that uses the library.
 
@@ -46,9 +48,7 @@ int main(int argc, char **argv)
 }
 ```
 
-## Project example
-
-The project file for example.
+## Example `.pro` file
 
 ``` makefile
 TEMPLATE = app
