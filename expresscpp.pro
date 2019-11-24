@@ -4,7 +4,7 @@
 
 TEMPLATE = lib
 TARGET = expresscpp
-INCLUDEPATH += ../interfaces
+INCLUDEPATH += ../interfaces ./include ../macros
 
 # The following define makes your compiler warn you if you use any
 # feature of Qt which has been marked as deprecated (the exact warnings
@@ -18,7 +18,17 @@ DEFINES += QT_DEPRECATED_WARNINGS
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 # Input
-HEADERS += qt_request.h qt_response.h request.h response.h server.h
-SOURCES += qt_request.cpp qt_response.cpp server.cpp
+HEADERS += src/http_request_impl.h \
+            src/http_response_impl.h \
+            src/server_impl.h \
+            include/server_impl.h \
+            include/server_factory.h \
+            include/http_request.h \
+            include/http_response.h
+SOURCES += src/http_request_impl.cpp \
+            src/http_response_impl.cpp \
+            src/server_impl.cpp \
+            src/server_factory.cpp
+CONFIG += debug
 
 QT += core network

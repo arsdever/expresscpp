@@ -1,19 +1,20 @@
 #pragma once
 
+#include <http_request.h>
+
 #include <QString>
 #include <QMap>
 #include <QByteArray>
-#include <http/request.h>
 
 namespace ad
 {
     namespace http
     {
-        class HttpRequest : public http::Request<QByteArray, QMap>
+        class HttpRequestImpl : public HttpRequest
         {
         public:
-            HttpRequest() = default;
-            ~HttpRequest() override;
+            HttpRequestImpl() = default;
+            ~HttpRequestImpl() override;
 
             QByteArray serialize() const override;
             void deserialize(QByteArray const &data) override;

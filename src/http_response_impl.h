@@ -1,6 +1,7 @@
 #pragma once
 
-#include <http/response.h>
+#include <http_response.h>
+
 #include <QString>
 #include <QMap>
 #include <QByteArray>
@@ -9,12 +10,11 @@ namespace ad
 {
     namespace http
     {
-        class HttpResponse : public Response<QByteArray, QMap>
+        class HttpResponseImpl : public HttpResponse
         {
         public:
-            HttpResponse(HttpVersion version, ResponseStatus status, QByteArray body = QByteArray());
-
-            ~HttpResponse() override;
+            HttpResponseImpl(HttpVersion version, ResponseStatus status, QByteArray body = QByteArray());
+            ~HttpResponseImpl() override;
 
             QByteArray serialize() const override;
             void deserialize(QByteArray const &data) override;
