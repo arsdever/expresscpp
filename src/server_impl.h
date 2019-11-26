@@ -14,6 +14,8 @@
 class ServerImpl : public QTcpServer, public Server {
   Q_OBJECT
 
+  class HandlerThread;
+
 public:
   using request_t = ad::http::HttpRequest;
   using response_t = ad::http::HttpResponse;
@@ -22,18 +24,17 @@ public:
 
 public:
   ServerImpl(QObject *parent = nullptr);
-  
-  void begin(int port = 8080) override;
+  ~ServerImpl();
+
+  bool begin(int port = 8080) override;
   void stop() override;
   void addEndpoint(QRegularExpression const &endpoint, ad::http::RequestMethod method, handler_t handler) override;
-
-  response_t *handleRequest(request_t &request);
 
 private slots:
   void connection();
   void handleQuery();
 
 private:
-  QList<QTcpSocket*> __connections;
+  QMap<QTcpSocket*, QString> __connections;
   QList<endpoint_t>  __handlers;
 };
