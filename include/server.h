@@ -18,7 +18,7 @@ public:
   using endpoint_t = QPair<QRegularExpression, QMap<ad::http::RequestMethod, handler_t> >;
 
 public:
-  virtual void begin(int port = 8080) = 0;
+  virtual bool begin(int port = 8080) = 0;
   virtual void stop() = 0;
   virtual void addEndpoint(QRegularExpression const &endpoint, ad::http::RequestMethod method, handler_t handler) = 0;
   
