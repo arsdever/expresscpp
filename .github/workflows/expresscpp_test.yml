@@ -9,7 +9,7 @@ jobs:
     - name: "Getting the sources"
       uses: actions/checkout@master
     - name: "Setting env"
-      uses: export ROOT=~/; export EXEC_ROOT=~/tmp/
+      run: export ROOT=~/; export EXEC_ROOT=~/tmp/
     - name: "Building the libraries"
       run: cd test && make
     - name: "Running tests"
