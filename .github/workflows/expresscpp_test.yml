@@ -1,0 +1,23 @@
+name: "Testing the expresscpp"
+on:
+  push:
+    branches: master
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+    - name: "Getting the sources"
+      uses: actions/checkout@master
+    - name: "Setting env"
+      uses: |
+        export ROOT=~/
+        export EXEC_ROOT=~/tmp/
+    - name: "Building the libraries"
+      run: |
+        cd test
+        make
+    - name: "Running tests"
+      run: |
+        cd $EXEC_ROOT
+        ./server &
+        ./client
